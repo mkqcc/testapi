@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react'
 
-class App extends Component {
-    constructor() {
-        super()
+export default class App extends React.Component {
+    constructor(props) {
+        super(props)
         this.state = {
             items: [],
             isLoaded: false,
@@ -10,16 +10,14 @@ class App extends Component {
     }
 
     componentDidMount() {
-        fetch('https://jsonplaceholder.typicode.com/users').then(response => {
-            return response.json()
-        }).then(data => {
-            console.log(data)
-            this.setState({isLoaded: true, items: data,})
-        })
+        fetch('https://jsonplaceholder.typicode.com/users').then(response => response.json())
+            .then(data => {
+                this.setState({ isLoaded: true, items: data, })
+            })
     }
 
     render() {
-        const {isLoaded, items} = this.state;
+        const { isLoaded, items } = this.state
         if (!isLoaded) {
             return <div>Loading...</div>
         } else {
@@ -30,7 +28,7 @@ class App extends Component {
                             {items.map(item => {
                                 return (
                                     <li key={item.id}> Name: {item.name} | Username: {item.username} | {' '}
-                                        <a href={`htttps://${item.website}`}>Website</a>
+                                        <a href={`https://${item.website}`}>Website</a>
                                     </li>
                                 )
                             })}
@@ -41,5 +39,3 @@ class App extends Component {
         }
     }
 }
-
-export default App
